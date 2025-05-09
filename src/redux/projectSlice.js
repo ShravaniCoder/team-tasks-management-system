@@ -9,7 +9,13 @@ const projectSlice = createSlice({
   initialState,
   reducers: {
     addProject: (state, action) => {
-      state.projects.push(action.payload);
+      const newProject = {
+        id: Date.now().toString(),
+        title: action.payload.title,
+        completedDates: [],
+        createdAt: new Date().toISOString(),
+      };
+      state.projects.push(newProject)
     },
   },
 });

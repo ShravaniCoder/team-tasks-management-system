@@ -25,6 +25,7 @@ import {
 import { Calendar } from "@/components/ui/calendar";
 import { useDispatch, useSelector } from "react-redux";
 import { addProject } from '@/redux/projectSlice';
+import { CardContent } from '@/components/CardContent';
 
 
 
@@ -35,25 +36,29 @@ const Projects = ({ className }) => {
   const [title, setTitle] = useState("");
   const [date, setDate] = useState(null);
 
-  const handleSaveProject = () => {
-    dispatch(
-      addProject({
-        id: Date.now(),
-        title,
-        dueDate: date ? format(date, "PPP") : "",
-      })
-    );
+ 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (title.trim()) {
+      dispatch(
+        addProject({
+          id: Date.now(),
+          title,
+          dueDate: date ? format(date, "PPP") : "",
+        })
+      );
+      setTitle("");
+      setDate(null);
+    }
+  }
 
-    setTitle("");
-    setDate(null);
-  };
   return (
     <div>
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center pb-8">
         {" "}
         <PageTitle title="Projects" />
         <Drawer direction="right">
-          <DrawerTrigger>
+          <DrawerTrigger asChild>
             <Button>
               <Plus />
               New Project
@@ -61,6 +66,7 @@ const Projects = ({ className }) => {
           </DrawerTrigger>
           <DrawerContent>
             <form
+              onSubmit={handleSubmit}
               className={cn(
                 "flex flex-col items-center justify-center p-8 gap-6 h-full",
                 className
@@ -98,9 +104,14 @@ const Projects = ({ className }) => {
               </div>
 
               <div className="flex gap-4 mt-8">
-                <Button onClick={handleSaveProject}>Save Project</Button>
+                <DrawerTrigger asChild>
+                  <Button>
+                    <Plus />
+                    New Project
+                  </Button>
+                </DrawerTrigger>
 
-                <DrawerClose>
+                <DrawerClose asChild>
                   <Button variant="outline">Cancel</Button>
                 </DrawerClose>
               </div>
@@ -108,7 +119,17 @@ const Projects = ({ className }) => {
           </DrawerContent>
         </Drawer>
       </div>
-      <table className="w-full border mt-4 text-left">
+      <section className="grid gap-4 grid-cols-1 w-full gap-x-8 transition-all sm:grid-cols-2 xl:grid-cols-4">
+        <CardContent>
+          {projects.map((project) => (
+            <div key={project.id}>
+              <h1>{project.title}</h1>
+              <p>{project.dueDate}</p>
+            </div>
+          ))}
+        </CardContent>
+      </section>
+      {/* <table className="w-full border mt-4 text-left">
         <thead>
           <tr className="bg-gray-100">
             <th className="px-4 py-2">Title</th>
@@ -123,7 +144,8 @@ const Projects = ({ className }) => {
             </tr>
           ))}
         </tbody>
-      </table>
+
+      </table> */}
     </div>
   );
 }

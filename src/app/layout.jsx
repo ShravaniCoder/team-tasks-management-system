@@ -21,8 +21,6 @@ export default function RootLayout({ children }) {
         )}
       >
          <Providers>
-          {" "}
-          {/* ✅ Wrap children with Redux Provider */}
           <SideNavbar />
           <div className="p-10 w-full">{children}</div>
         </Providers>
