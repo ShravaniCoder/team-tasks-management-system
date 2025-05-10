@@ -30,12 +30,12 @@ const SideNavbar = () => {
       </div>
 
       {!mobileWidth && (
-        <div className="absolute right-[-20px] top-10">
+        <div className="absolute right-[-25px] top-10">
           {" "}
           <Button
             onClick={toggleSidebar}
             variant="secondary"
-            className="rounded-full p-2"
+           
           >
             <ChevronRight />
           </Button>

@@ -15,12 +15,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={cn(
-          "min-h-screen w-full bg-white text-black flex",
-          inter.className
-        )}
+        className={`min-h-screen w-full bg-white text-black flex ${inter.className}`}
       >
-         <Providers>
+        <Providers>
           <SideNavbar />
           <div className="p-10 w-full">{children}</div>
         </Providers>
