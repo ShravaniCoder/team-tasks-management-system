@@ -137,7 +137,7 @@ const Projects = ({ className }) => {
               <h1 className="text-lg font-semibold">{project.title}</h1>
               <p className="text-sm text-black">Due date: {project.dueDate}</p>
             </div>
-            <div className="flex justify-between gap-2 ">
+            <div className="flex justify-between gap-1 ">
               <Button
                 variant="outline"
                 onClick={() =>

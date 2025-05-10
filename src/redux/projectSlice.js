@@ -8,11 +8,14 @@ const projectSlice = createSlice({
   name: "project",
   initialState,
   reducers: {
+    setProjects: (state, action) => {
+      state.projects = action.payload;
+    },
     addProject: (state, action) => {
       const newProject = {
         id: Date.now().toString(),
         title: action.payload.title,
-        dueDate: action.payload.dueDate, 
+        dueDate: action.payload.dueDate,
         completedDates: [],
         createdAt: new Date().toISOString(),
       };
@@ -21,11 +24,11 @@ const projectSlice = createSlice({
     toggleProject: (state, action) => {
       const project = state.projects.find((p) => p.id === action.payload.id);
       if (project) {
-        const index = project.completedDates.indexOf(action.payload.date)
+        const index = project.completedDates.indexOf(action.payload.date);
         if (index > -1) {
-          project.completedDates.splice(index, 1)
+          project.completedDates.splice(index, 1);
         } else {
-          project.completedDates.push(action.payload.date)
+          project.completedDates.push(action.payload.date);
         }
       }
     },
@@ -35,5 +38,5 @@ const projectSlice = createSlice({
   },
 });
 
-export const { addProject, toggleProject, deleteProject } = projectSlice.actions;
+export const { addProject, toggleProject, deleteProject, setProjects } = projectSlice.actions;
 export default projectSlice.reducer;

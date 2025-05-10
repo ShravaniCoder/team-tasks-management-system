@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from 'react';
 import {
-  CalendarCheck,
   ChevronRight,
   LayoutDashboard,
   NotebookPen,
@@ -68,12 +67,7 @@ const SideNavbar = () => {
             variant: "ghost",
             href: "/members",
           },
-          {
-            title: "Assign Task",
-            icon: CalendarCheck,
-            variant: "ghost",
-            href: "/assignTask",
-          },
+          
         ]}
       />
     </div>
